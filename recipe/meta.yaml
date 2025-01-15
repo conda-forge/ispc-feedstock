@@ -1,16 +1,14 @@
 {% set name = "ispc" %}
-{% set version = "1.17.0" %}
-{% set llvm_version = "13" %}
+{% set version = "1.25.3" %}
+{% set llvm_version = "18" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ispc/ispc/archive/refs/tags/v1.17.0.tar.gz
-  sha256: 37fb1055d6c6b232e112d8d50145d726824ed4d8da93a7396315dceba6c76e62
-  patches:
-    - skip_32.diff
+  url: https://github.com/ispc/ispc/archive/refs/tags/v1.25.3.tar.gz
+  sha256: 6f00038e0e86e90474f3117c3b393f6695a8fbe1b3d8fe3b1a0baf197dfb7557
 
 build:
   number: 0
