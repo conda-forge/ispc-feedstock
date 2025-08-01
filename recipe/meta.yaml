@@ -1,5 +1,5 @@
 {% set name = "ispc" %}
-{% set version = "1.17.0" %}
+{% set version = "1.27.0" %}
 {% set llvm_version = "13" %}
 
 package:
@@ -7,18 +7,19 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/ispc/ispc/archive/refs/tags/v1.17.0.tar.gz
-  sha256: 37fb1055d6c6b232e112d8d50145d726824ed4d8da93a7396315dceba6c76e62
+  url: https://github.com/ispc/ispc/archive/refs/tags/v1.17.0.zip
+  sha256: 3ba60417b8512058e4422fa4a07cd0432622421c33570f6b68f19cf02eea3a7b
   patches:
     - skip_32.diff
 
 build:
   number: 0
-  skip: True  # [not linux]
+  skip: true  # [not linux]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - python *
     - cmake
