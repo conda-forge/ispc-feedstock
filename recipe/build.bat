@@ -18,7 +18,7 @@ if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
-    -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
+    -DFILE_CHECK_EXECUTABLE=%LIBRARY_BIN%\FileCheck.exe ^
     -DISPC_NO_DUMPS=ON ^
     -DISPC_SLIM_BINARY=ON ^
     -DISPC_LIBRARY=OFF ^
