@@ -13,7 +13,7 @@ if "%target_platform%"=="win-64" (
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake -S . -B build -G "NMake Makefiles JOM" ^
+cmake -S . -B build -G "Ninja" ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%LIBRARY_BIN%\FileCheck.exe ^
     -DISPC_NO_DUMPS=ON ^
