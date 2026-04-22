@@ -1,7 +1,7 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%SRC_DIR%\build\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
+set PATH=%SRC_DIR%\build\bin;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
 set EXTRA_CMAKE_ARGS=
@@ -13,7 +13,7 @@ if "%target_platform%"=="win-64" (
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake -S . -B build -G "Ninja" ^
+cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%LIBRARY_BIN%\FileCheck.exe ^
     -DISPC_NO_DUMPS=ON ^
