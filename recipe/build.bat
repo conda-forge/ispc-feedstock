@@ -13,7 +13,7 @@ if "%target_platform%"=="win-64" (
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake -S . -B build ^
+cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
     -DISPC_NO_DUMPS=ON ^
