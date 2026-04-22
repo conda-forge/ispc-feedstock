@@ -13,8 +13,7 @@ source:
   sha256: 73b30c74fdfc56c3097015476df14d0a4bcb6705d9e286c6d51c1ed578d49e22
 
 build:
-  number: 0
-  skip: not linux
+  number: 1
 
 requirements:
   build:
@@ -34,10 +33,10 @@ requirements:
         - bison
     - if: win
       then:
+        - jom
         - m2-flex
         - m2-bison
         - m2-m4
-
   host:
     - clangdev  ${{ llvm_version }}.*
     - llvmdev   ${{ llvm_version }}.*
