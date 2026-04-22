@@ -17,7 +17,7 @@ cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
     -DISPC_NO_DUMPS=ON ^
-    -DISPC_SLIM_BINARY=OFF ^
+    -DISPC_SLIM_BINARY=ON ^
     -DISPC_LIBRARY=OFF ^
     -DISPC_LIBRARY_JIT=OFF ^
     -DISPC_INCLUDE_TESTS=ON ^
