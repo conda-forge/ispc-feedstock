@@ -35,6 +35,7 @@ requirements:
       then:
         - jom
         - m2-base
+        - m2-m4
   host:
     - ${{ "ncurses" if unix }}
     - clangdev  ${{ llvm_version }}.*
