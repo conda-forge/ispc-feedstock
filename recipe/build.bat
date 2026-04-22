@@ -2,19 +2,24 @@
 setlocal enabledelayedexpansion
 
 set PATH=%SRC_DIR%\build\bin;%LIBRARY_BIN%;%PATH%
+if %ERRORLEVEL% neq 0 exit /b 1
 
 set EXTRA_CMAKE_ARGS=
+if %ERRORLEVEL% neq 0 exit /b 1
 if "%target_platform%"=="win-64" (
     set EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON
 ) else if "%target_platform%"=="win-arm64" (
     set EXTRA_CMAKE_ARGS=-DARM_ENABLED=ON
 )
+if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
     -DISPC_NO_DUMPS=ON ^
     -DISPC_SLIM_BINARY=OFF ^
+    -DISPC_LIBRARY=OFF ^
+    -DISPC_LIBRARY_JIT=OFF ^
     -DISPC_INCLUDE_TESTS=ON ^
     -DISPC_INCLUDE_EXAMPLES=OFF ^
     -DISPC_INCLUDE_RT=OFF ^
