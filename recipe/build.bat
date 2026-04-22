@@ -1,9 +1,8 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%LIBRARY_BIN%;%PATH%
-if %ERRORLEVEL% neq 0 exit /b 1
-
+set PATH=%PREFIX%\Library\bin
+set PATH=%PREFIX%\bin;%PATH%
 set PATH=%SRC_DIR%\build\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
