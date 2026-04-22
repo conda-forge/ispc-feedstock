@@ -26,7 +26,7 @@ cmake -S . -B build -G "NMake Makefiles JOM" ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake --build build --parallel %CPU_COUNT% --verbose
+cmake --build build --parallel 1
 if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --install build
