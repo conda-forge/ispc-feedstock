@@ -41,6 +41,12 @@ echo === DLL dependency check (imports) ===
 dumpbin /imports %SRC_DIR%\build\bin\ispc.exe
 echo === End check ===
 
+echo === runtime check ===
+where VCRUNTIME140.dll
+where MSVCP140.dll
+where zstd.dll
+where zlib.dll
+
 echo === Testing ispc.exe ===
 %SRC_DIR%\build\bin\ispc.exe --version
 echo Exit code: %ERRORLEVEL%
