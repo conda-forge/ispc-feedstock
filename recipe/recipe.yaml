@@ -22,8 +22,6 @@ requirements:
     - ${{ stdlib('c') }}
     - python *
     - cmake
-    - clangdev  ${{ llvm_version }}.*
-    - llvmdev   ${{ llvm_version }}.*
     - if: not osx
       then:
         - clang     ${{ llvm_version }}.*
