@@ -10,15 +10,16 @@ if "%target_platform%"=="win-64" (
 )
 
 cmake -S . -B build -G "NMake Makefiles JOM" ^
-  %CMAKE_ARGS% ^
-  -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
-  -DISPC_NO_DUMPS=ON ^
-  -DISPC_SLIM_BINARY=OFF ^
-  -DISPC_INCLUDE_TESTS=ON ^
-  -DISPC_INCLUDE_EXAMPLES=OFF ^
-  -DISPC_INCLUDE_RT=OFF ^
-  -DISPC_INCLUDE_BENCHMARKS=OFF ^
-  %EXTRA_CMAKE_ARGS%
+    %CMAKE_ARGS% ^
+    -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
+    -DISPC_NO_DUMPS=ON ^
+    -DISPC_SLIM_BINARY=OFF ^
+    -DISPC_INCLUDE_TESTS=ON ^
+    -DISPC_INCLUDE_EXAMPLES=OFF ^
+    -DISPC_INCLUDE_RT=OFF ^
+    -DISPC_INCLUDE_BENCHMARKS=OFF ^
+    -DCMAKE_EXE_LINKER_FLAGS="%LIBRARY_LIB%\zstd.lib %LIBRARY_LIB%\zlib.lib" ^
+    %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --build build --parallel %CPU_COUNT%
