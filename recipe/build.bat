@@ -10,5 +10,10 @@ cmake -S . -B build -G "NMake Makefiles JOM" ^
   -DISPC_INCLUDE_EXAMPLES=OFF ^
   -DISPC_INCLUDE_RT=OFF ^
   -DISPC_INCLUDE_BENCHMARKS=OFF
+if %ERRORLEVEL% neq 0 exit /b 1
+
 cmake --build build --parallel %CPU_COUNT%
+if %ERRORLEVEL% neq 0 exit /b 1
+
 cmake --install build
+if %ERRORLEVEL% neq 0 exit /b 1
