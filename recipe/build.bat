@@ -28,13 +28,12 @@ cmake -S . -B build ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
+cmake --build build --parallel %CPU_COUNT%
+
 echo === Testing ispc.exe ===
 %SRC_DIR%\build\bin\ispc.exe --version
 echo Exit code: %ERRORLEVEL%
 echo === End ===
-
-cmake --build build --parallel %CPU_COUNT%
-if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --install build
 if %ERRORLEVEL% neq 0 exit /b 1
