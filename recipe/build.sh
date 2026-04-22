@@ -2,11 +2,11 @@
 set -exo pipefail
 
 if [[ "${target_platform}" == *"-64" ]]; then
-  target_arch="X86"
+  extra_cmake_args="-DX86_ENABLED=ON"
 elif [[ "${target_platform}" == *"-aarch64" || "${target_platform}" == *"-arm64" ]]; then
-  target_arch="ARM"
+  extra_cmake_args="-DARM_ENABLED=ON"
 elif [[ "${target_platform}" == *"-ppc64le" ]]; then
-  target_arch="GENERIC"
+  extra_cmake_args="-DPPC64_ENABLED=ON"
 fi
 
 cmake -S . -B build \
@@ -18,7 +18,7 @@ cmake -S . -B build \
   -DISPC_INCLUDE_TESTS=ON \
   -DISPC_INCLUDE_EXAMPLES=OFF \
   -DISPC_INCLUDE_RT=OFF \
-  -DISPC_TARGETS="${target_arch}"
+  ${extra_cmake_args}
 cmake --build build --parallel ${CPU_COUNT}
 cmake --install build
 
