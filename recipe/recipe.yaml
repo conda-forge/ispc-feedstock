@@ -38,7 +38,7 @@ requirements:
         - m2-flex
         - m2-m4
   host:
-    - ${{ "libllvm-c" + llvm_version if win }}
+    - ${{ "libllvm-c" ~ llvm_version if win }}
     - ${{ "ncurses" if unix }}
     - clangdev  ${{ llvm_version }}.*
     - llvmdev   ${{ llvm_version }}.*
