@@ -22,10 +22,12 @@ requirements:
     - ${{ stdlib('c') }}
     - python *
     - cmake
-    - clang     ${{ llvm_version }}.*
-    - clangxx   ${{ llvm_version }}.* 
     - clangdev  ${{ llvm_version }}.*
     - llvmdev   ${{ llvm_version }}.*
+    - if: not osx
+      then:
+        - clang     ${{ llvm_version }}.*
+        - clangxx   ${{ llvm_version }}.* 
     - if: unix
       then:
         - make
@@ -38,12 +40,12 @@ requirements:
         - m2-bison
         - m2-m4
   host:
+    - ${{ "ncurses" if unix }}
     - clangdev  ${{ llvm_version }}.*
     - llvmdev   ${{ llvm_version }}.*
     - llvm      ${{ llvm_version }}.*
-    - if: unix
-      then: ncurses
     - zlib
+    - zstd
 
 tests:
   - script:
