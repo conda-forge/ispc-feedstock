@@ -1,8 +1,9 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set EXTRA_CMAKE_ARGS=
+set PATH=%LIBRARY_BIN%;%PATH%
 
+set EXTRA_CMAKE_ARGS=
 if "%target_platform%"=="win-64" (
     set EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON
 ) else if "%target_platform%"=="win-arm64" (
