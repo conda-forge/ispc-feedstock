@@ -30,6 +30,10 @@ if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --build build --parallel %CPU_COUNT%
 
+echo === DLL dependency check ===
+dumpbin /dependents %SRC_DIR%\build\bin\ispc.exe
+echo === End check ===
+
 echo === Testing ispc.exe ===
 %SRC_DIR%\build\bin\ispc.exe --version
 echo Exit code: %ERRORLEVEL%
