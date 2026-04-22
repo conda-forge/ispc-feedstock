@@ -35,6 +35,8 @@ requirements:
       then:
         - jom
         - m2-base
+        - m2-bison
+        - m2-flex
         - m2-m4
   host:
     - ${{ "ncurses" if unix }}
