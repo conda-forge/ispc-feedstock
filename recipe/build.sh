@@ -18,7 +18,7 @@ cmake -S . -B build \
   -DISPC_INCLUDE_TESTS=ON \
   -DISPC_INCLUDE_EXAMPLES=OFF \
   -DISPC_INCLUDE_RT=OFF \
-  -DTARGETS_TO_BUILD="${target_arch}"
+  -DISPC_TARGETS="${target_arch}"
 cmake --build build --parallel ${CPU_COUNT}
 cmake --install build
 
