@@ -1,7 +1,7 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%LIBRARY_BIN%;%PATH%
+set PATH=%SRC_DIR%\build\bin;%LIBRARY_BIN%;%PATH%
 
 set EXTRA_CMAKE_ARGS=
 if "%target_platform%"=="win-64" (
