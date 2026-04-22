@@ -34,9 +34,7 @@ requirements:
     - if: win
       then:
         - jom
-        - m2-flex
-        - m2-bison
-        - m2-m4
+        - m2-base
   host:
     - ${{ "ncurses" if unix }}
     - clangdev  ${{ llvm_version }}.*
