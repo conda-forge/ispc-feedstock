@@ -1,0 +1,8 @@
+c_compiler_version:
+  - ${{ "21" if osx }}
+cxx_compiler_version:
+  - ${{ "21" if osx }}
+clang_compiler_version:
+  - ${{ "21" if osx }}
+clangxx_compiler_version:
+  - ${{ "21" if osx }}
