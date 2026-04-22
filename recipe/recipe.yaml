@@ -33,7 +33,7 @@ requirements:
         - bison
     - if: win
       then:
-        - ninja
+        - jom
         - m2-base
         - m2-bison
         - m2-flex
