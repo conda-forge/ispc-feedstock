@@ -1,15 +1,15 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%SRC_DIR%\build\bin;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
+set PATH=%SRC_DIR%\build\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
 set EXTRA_CMAKE_ARGS=
 if %ERRORLEVEL% neq 0 exit /b 1
 if "%target_platform%"=="win-64" (
-    set "EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON -DARM_ENABLED=OFF"
+    set "EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON"
 ) else if "%target_platform%"=="win-arm64" (
-    set "EXTRA_CMAKE_ARGS=-DARM_ENABLED=ON -DX86_ENABLED=OFF"
+    set "EXTRA_CMAKE_ARGS=-DARM_ENABLED=ON"
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
@@ -30,25 +30,6 @@ cmake --build build --parallel %CPU_COUNT% --verbose
 
 dir %SRC_DIR%\build /s
 if %ERRORLEVEL% neq 0 exit /b 1
-
-echo === DLL dependency check ===
-dumpbin /dependents %SRC_DIR%\build\bin\ispc.exe
-echo === End check ===
-
-echo === DLL dependency check (imports) ===
-dumpbin /imports %SRC_DIR%\build\bin\ispc.exe
-echo === End check ===
-
-echo === runtime check ===
-where VCRUNTIME140.dll
-where MSVCP140.dll
-where zstd.dll
-where zlib.dll
-
-echo === Testing ispc.exe ===
-%SRC_DIR%\build\bin\ispc.exe --version
-echo Exit code: %ERRORLEVEL%
-echo === End ===
 
 cmake --install build
 if %ERRORLEVEL% neq 0 exit /b 1
