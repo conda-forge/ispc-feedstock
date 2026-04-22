@@ -7,13 +7,13 @@ if %ERRORLEVEL% neq 0 exit /b 1
 set EXTRA_CMAKE_ARGS=
 if %ERRORLEVEL% neq 0 exit /b 1
 if "%target_platform%"=="win-64" (
-    set EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON
+    set "EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON -DARM_ENABLED=OFF"
 ) else if "%target_platform%"=="win-arm64" (
-    set EXTRA_CMAKE_ARGS=-DARM_ENABLED=ON
+    set "EXTRA_CMAKE_ARGS=-DARM_ENABLED=ON -DX86_ENABLED=OFF"
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake -S . -B build -G "NMake Makefiles JOM" ^
+cmake -S . -B build ^
     %CMAKE_ARGS% ^
     -DFILE_CHECK_EXECUTABLE=%PREFIX%/libexec/llvm/FileCheck ^
     -DISPC_NO_DUMPS=ON ^
@@ -28,14 +28,13 @@ cmake -S . -B build -G "NMake Makefiles JOM" ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake --build build --parallel %CPU_COUNT%
-if %ERRORLEVEL% neq 0 exit /b 1
-
 echo === Testing ispc.exe ===
 %SRC_DIR%\build\bin\ispc.exe --version
 echo Exit code: %ERRORLEVEL%
 echo === End ===
 
+cmake --build build --parallel %CPU_COUNT%
+if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --install build
 if %ERRORLEVEL% neq 0 exit /b 1
