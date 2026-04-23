@@ -27,7 +27,14 @@ cmake -S . -B build ^
 if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake --build build --config Release --parallel 1
-if %ERRORLEVEL% neq 0 exit /b 1
+
+echo === PATH check ===
+where zstd.dll
+where zlib.dll
+where VCRUNTIME140.dll
+echo === imports check ===
+dumpbin /imports %SRC_DIR%\build\bin\Release\ispc.exe
+echo === End ===
 
 cmake --install build --config Release
 if %ERRORLEVEL% neq 0 exit /b 1
