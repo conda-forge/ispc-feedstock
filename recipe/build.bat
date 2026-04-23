@@ -1,11 +1,12 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%SRC_DIR%\build\bin;%SRC_DIR%\build\bin\Release\;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
+set PATH=%SRC_DIR%\build\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
 set EXTRA_CMAKE_ARGS=
 if %ERRORLEVEL% neq 0 exit /b 1
+
 if "%target_platform%"=="win-64" (
     set "EXTRA_CMAKE_ARGS=-DX86_ENABLED=ON"
 ) else if "%target_platform%"=="win-arm64" (
@@ -13,7 +14,7 @@ if "%target_platform%"=="win-64" (
 )
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake -S . -B build ^
+cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DCMAKE_BUILD_RPATH="%PREFIX%\lib" ^
     -DCMAKE_INSTALL_RPATH="%PREFIX%\lib" ^
@@ -28,16 +29,8 @@ cmake -S . -B build ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake --build build --config Release --parallel %CPU_COUNT% --verbose
+cmake --build build --parallel %CPU_COUNT%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-echo === PATH check ===
-where zstd.dll
-where zlib.dll
-where VCRUNTIME140.dll
-echo === imports check ===
-dumpbin /imports %SRC_DIR%\build\bin\Release\ispc.exe
-echo === End ===
-
-cmake --install build --config Release
+cmake --install build
 if %ERRORLEVEL% neq 0 exit /b 1
