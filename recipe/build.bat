@@ -4,11 +4,6 @@ setlocal enabledelayedexpansion
 set PATH=%SRC_DIR%\build\bin;%SRC_DIR%\build\bin\Release\;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-mkdir %SRC_DIR%\build\bin\Release
-copy %PREFIX%\Library\bin\zstd.dll %SRC_DIR%\build\bin\Release\
-copy %PREFIX%\Library\bin\zlib.dll %SRC_DIR%\build\bin\Release\
-if %ERRORLEVEL% neq 0 exit /b 1
-
 set EXTRA_CMAKE_ARGS=
 if %ERRORLEVEL% neq 0 exit /b 1
 if "%target_platform%"=="win-64" (
@@ -20,6 +15,8 @@ if %ERRORLEVEL% neq 0 exit /b 1
 
 cmake -S . -B build ^
     %CMAKE_ARGS% ^
+    -DCMAKE_BUILD_RPATH="%PREFIX%\lib" ^
+    -DCMAKE_INSTALL_RPATH="%PREFIX%\lib" ^
     -DFILE_CHECK_EXECUTABLE=%LIBRARY_BIN%\FileCheck.exe ^
     -DISPC_NO_DUMPS=ON ^
     -DISPC_SLIM_BINARY=ON ^
@@ -27,7 +24,7 @@ cmake -S . -B build ^
     -DISPC_INCLUDE_EXAMPLES=OFF ^
     -DISPC_INCLUDE_RT=OFF ^
     -DISPC_INCLUDE_BENCHMARKS=OFF ^
-    -DCMAKE_EXE_LINKER_FLAGS="%LIBRARY_LIB%\zstd.lib %LIBRARY_LIB%\zlib.lib" ^
+    -DCMAKE_EXE_LINKER_FLAGS="%LIBRARY_LIB%\zstd_static.lib %LIBRARY_LIB%\zlibstatic.lib" ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
