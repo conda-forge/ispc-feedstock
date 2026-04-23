@@ -11,6 +11,8 @@ fi
 
 cmake -S . -B build \
   ${CMAKE_ARGS} \
+  -DCMAKE_BUILD_RPATH=${PREFIX}/lib \
+  -DCMAKE_INSTALL_RPATH=${PREFIX}/lib \
   -DFILE_CHECK_EXECUTABLE=${PREFIX}/libexec/llvm/FileCheck \
   -DARM_ENABLED=OFF \
   -DISPC_NO_DUMPS=ON \
