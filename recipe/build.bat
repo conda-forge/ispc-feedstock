@@ -4,6 +4,11 @@ setlocal enabledelayedexpansion
 set PATH=%SRC_DIR%\build\bin;%SRC_DIR%\build\bin\Release\;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
+mkdir %SRC_DIR%\build\bin\Release
+copy %PREFIX%\Library\bin\zstd.dll %SRC_DIR%\build\bin\Release\
+copy %PREFIX%\Library\bin\zlib.dll %SRC_DIR%\build\bin\Release\
+if %ERRORLEVEL% neq 0 exit /b 1
+
 set EXTRA_CMAKE_ARGS=
 if %ERRORLEVEL% neq 0 exit /b 1
 if "%target_platform%"=="win-64" (
@@ -26,7 +31,8 @@ cmake -S . -B build ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake --build build --config Release --parallel 1
+cmake --build build --config Release --parallel %CPU_COUNT%
+if %ERRORLEVEL% neq 0 exit /b 1
 
 echo === PATH check ===
 where zstd.dll
