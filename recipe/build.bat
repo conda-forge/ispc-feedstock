@@ -1,7 +1,7 @@
 @echo on
 setlocal enabledelayedexpansion
 
-set PATH=%SRC_DIR%\build\bin;%SRC_DIR%\build\Release\bin;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
+set PATH=%SRC_DIR%\build\bin;%SRC_DIR%\build\bin\Release\;%BUILD_PREFIX%\Library\bin;%BUILD_PREFIX%\bin;%PREFIX%\Library\bin;%PREFIX%\bin;%PATH%
 if %ERRORLEVEL% neq 0 exit /b 1
 
 set EXTRA_CMAKE_ARGS=
