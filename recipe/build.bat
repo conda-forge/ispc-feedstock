@@ -28,7 +28,7 @@ cmake -S . -B build ^
     %EXTRA_CMAKE_ARGS%
 if %ERRORLEVEL% neq 0 exit /b 1
 
-cmake --build build --config Release --parallel %CPU_COUNT%
+cmake --build build --config Release --parallel %CPU_COUNT% --verbose
 if %ERRORLEVEL% neq 0 exit /b 1
 
 echo === PATH check ===
