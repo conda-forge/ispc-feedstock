@@ -47,16 +47,8 @@ requirements:
 
 tests:
   - script:
-      - if: unix
-        then: |
-          ispc --version
-          ispc --help
-      - if: win
-        then: |
-          ispc --version
-          if %ERRORLEVEL% neq 0 exit /b 1
-          ispc --help
-          if %ERRORLEVEL% neq 0 exit /b 1
+      - ispc --version
+      - ispc --help
 
 about:
   homepage: https://ispc.github.io
