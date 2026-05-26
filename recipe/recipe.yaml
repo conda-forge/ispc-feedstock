@@ -13,7 +13,7 @@ source:
   sha256: 73b30c74fdfc56c3097015476df14d0a4bcb6705d9e286c6d51c1ed578d49e22
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -39,25 +39,16 @@ requirements:
         - m2-m4
   host:
     - ${{ "ncurses" if unix }}
-    - ${{ "zstd-static" if win }}
+    - ${{ "zstd-static" if win else "zstd" }}
     - clangdev  ${{ llvm_version }}.*
     - llvmdev   ${{ llvm_version }}.*
     - llvm      ${{ llvm_version }}.*
     - zlib
-    - zstd
 
 tests:
   - script:
-      - if: unix
-        then: |
-          ispc --version
-          ispc --help
-      - if: win
-        then: |
-          ispc --version
-          if %ERRORLEVEL% neq 0 exit /b 1
-          ispc --help
-          if %ERRORLEVEL% neq 0 exit /b 1
+      - ispc --version
+      - ispc --help
 
 about:
   homepage: https://ispc.github.io
