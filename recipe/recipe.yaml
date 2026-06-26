@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.30.0"
+  version: "1.31.0"
   llvm_version: "21"
 
 package:
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://github.com/ispc/ispc/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 73b30c74fdfc56c3097015476df14d0a4bcb6705d9e286c6d51c1ed578d49e22
+  sha256: 671c79bdff2d97aead3897da1a6b67a163af8c4e329350d07cf3e63d592955ff
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
@@ -25,7 +25,7 @@ requirements:
     - if: not osx
       then:
         - clang     ${{ llvm_version }}.*
-        - clangxx   ${{ llvm_version }}.* 
+        - clangxx   ${{ llvm_version }}.*
     - if: unix
       then:
         - make
