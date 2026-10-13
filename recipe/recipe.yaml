@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.31.0"
+  version: "1.32.0"
   llvm_version: "21"
 
 package:
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://github.com/ispc/ispc/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 671c79bdff2d97aead3897da1a6b67a163af8c4e329350d07cf3e63d592955ff
+  sha256: 705b818062602a0c6b62965a8aa011508ef7f9decce716cf1645f2b04ba1e9f8
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
